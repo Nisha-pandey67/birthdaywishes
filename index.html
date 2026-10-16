@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#16070d">
+<title>For Doctor Shaheb ♥</title>
+<style>
+  :root {
+    --night: #10070c;
+    --wine: #3a101e;
+    --rose: #e9a6b5;
+    --soft: #f6dfe4;
+    --muted: #c5aab1;
+    --gold: #f0d6a2;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--soft);
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(104, 27, 52, .45), transparent 48%),
+      radial-gradient(ellipse at 10% 70%, rgba(64, 16, 35, .28), transparent 40%),
+      var(--night);
+    font-family: Georgia, "Times New Roman", serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  #stars, #confetti {
+    position: fixed; inset: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 0;
+  }
+  #stars { opacity: .75; }
+  .wrap { position: relative; z-index: 1; }
+  .hero {
+    min-height: 100svh; display: flex; align-items: center; justify-content: center;
+    padding: 34px 20px 52px; text-align: center; position: relative;
+  }
+  .hero-inner { width: min(100%, 720px); }
+  .eyebrow {
+    color: var(--gold); letter-spacing: .28em; text-transform: uppercase;
+    font: 10px/1.8 Arial, sans-serif; margin-bottom: 22px;
+  }
+  .moon {
+    width: 62px; height: 62px; border-radius: 50%; margin: 0 auto 28px;
+    background: #f6e5d7; box-shadow: 0 0 26px rgba(246,229,215,.22), 0 0 90px rgba(233,166,181,.13);
+    position: relative;
+  }
+  .moon::after { content:""; position:absolute; width:58px; height:58px; border-radius:50%; background:#1b0911; top:-7px; left:15px; }
+  h1 { font-size: clamp(42px, 10vw, 76px); line-height: 1.02; font-weight: normal; margin: 0; letter-spacing: -.04em; }
+  h1 em { color: var(--rose); font-weight: normal; }
+  .intro { color: var(--muted); font: 14px/1.8 Arial, sans-serif; max-width: 420px; margin: 22px auto 30px; }
+  button {
+    appearance: none; border: 1px solid rgba(233,166,181,.6); border-radius: 999px;
+    padding: 14px 22px; color: var(--soft); background: rgba(77,20,39,.45);
+    font: 12px Arial, sans-serif; letter-spacing: .08em; cursor: pointer;
+    transition: transform .2s, background .2s, box-shadow .2s;
+  }
+  button:hover { transform: translateY(-2px); background: rgba(112,32,57,.6); box-shadow: 0 8px 28px rgba(0,0,0,.18); }
+  button:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+  .hint { color: #a88b95; font: 11px Arial,sans-serif; margin-top: 17px; }
+  .scroll-cue { position:absolute; bottom: 22px; left:0; right:0; color:#9d7885; font:10px Arial,sans-serif; letter-spacing:.18em; text-transform:uppercase; }
+  section { padding: 76px 20px; }
+  .section-inner { width: min(100%, 670px); margin: 0 auto; }
+  .kicker { color: var(--gold); font: 10px Arial,sans-serif; text-transform:uppercase; letter-spacing:.25em; margin-bottom: 17px; }
+  h2 { font-weight: normal; font-size: clamp(30px, 7vw, 48px); line-height: 1.12; margin: 0 0 20px; }
+  p { color: #d9c2c9; font-size: 16px; line-height: 1.9; margin: 0 0 15px; }
+  .card {
+    border: 1px solid rgba(233,166,181,.2); border-radius: 22px;
+    background: linear-gradient(145deg, rgba(80,22,42,.36), rgba(26,9,17,.6));
+    padding: clamp(22px, 6vw, 38px); box-shadow: 0 18px 65px rgba(0,0,0,.13);
+  }
+  .divider { text-align:center; color:#9b526a; letter-spacing:.55em; padding: 0 0 14px; }
+  .story-list { display:grid; gap:14px; margin-top: 28px; }
+  .story-item { display:grid; grid-template-columns: 34px 1fr; gap:14px; align-items:start; }
+  .story-dot { color:var(--rose); border:1px solid rgba(233,166,181,.45); width:30px; height:30px; border-radius:50%; display:grid; place-items:center; font-size:13px; }
+  .story-item p { margin:2px 0 0; font-size:15px; }
+  .story-item strong { color:#f8e7eb; font-weight:normal; }
+  .reveal-box { text-align:center; padding: 30px 20px; border-radius:20px; border:1px dashed rgba(233,166,181,.35); margin-top: 24px; }
+  .secret { display:none; margin: 24px auto 0; max-width: 460px; color:#f7dfe5; font-size:19px; line-height:1.8; font-style:italic; }
+  .secret.show { display:block; animation: appear .8s ease both; }
+  .birthday-note { text-align:center; }
+  .birthday-note p { max-width: 540px; margin: 0 auto 15px; }
+  .signature { color:var(--rose); font-style:italic; font-size:22px; margin-top:28px; }
+  footer { padding: 22px 20px 48px; text-align:center; color:#8c6a76; font:11px/1.8 Arial,sans-serif; letter-spacing:.04em; }
+  .heart { display:inline-block; color:var(--rose); animation: heartbeat 1.8s ease-in-out infinite; }
+  .music-btn { position:fixed; right:14px; bottom:14px; z-index:5; padding:11px 14px; font-size:11px; background:rgba(20,7,13,.86); backdrop-filter:blur(10px); }
+  .hidden-message { display:none; }
+  .hidden-message.show { display:block; animation: appear .8s ease both; }
+  @keyframes appear { from {opacity:0; transform:translateY(10px)} to {opacity:1; transform:translateY(0)} }
+  @keyframes heartbeat { 0%,100%{transform:scale(1)} 50%{transform:scale(1.16)} }
+  @media (prefers-reduced-motion: reduce) { *,*::before,*::after { animation:none !important; scroll-behavior:auto !important; transition:none !important; } }
+  @media (max-width:420px) {
+    section { padding: 58px 17px; }
+    p { font-size:15px; }
+    .music-btn { bottom:10px; right:10px; }
+  }
+</style>
+</head>
+<body>
+<canvas id="stars" aria-hidden="true"></canvas>
+<canvas id="confetti" aria-hidden="true"></canvas>
+<button class="music-btn" id="musicToggle" aria-label="Toggle gentle background sound">♫ sound off</button>
+
+<div class="wrap">
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div class="eyebrow">a little midnight surprise</div>
+      <div class="moon" aria-hidden="true"></div>
+      <h1>For <em>Doctor</em><br>Shaheb</h1>
+      <p class="intro">A small corner of the internet, made just for you.<br>Open it when you're ready.</p>
+      <button id="openBtn">open your birthday surprise ♥</button>
+      <div class="hint">just a little something from me</div>
+    </div>
+    <div class="scroll-cue">there's more below ↓</div>
+  </header>
+
+  <main>
+    <section id="birthday" class="hidden-message">
+      <div class="section-inner birthday-note">
+        <div class="kicker">today is all about you</div>
+        <h2>Happy birthday,<br><em style="color:var(--rose)">Doctor Shaheb.</em></h2>
+        <div class="card">
+          <div class="divider">✦ ♥ ✦</div>
+          <p>happy birthdayyy ❤️</p>
+          <p>I hope this year brings aap lots of happiness, peace and all the things you've been working so hard for. I know MBBS isn't always easy, so I hope you do well, get little breaks from all the studying, and have plenty of reasons to smile too.</p>
+          <p>And please apna dhyaan rakha kijiye, okay? I hope life is kind to you this year and that good things find their way to you, one by one.</p>
+          <p>I'm really glad we started talking again. I didn't expect it, but it's become something I genuinely look forward to.</p>
+          <div class="signature">have the loveliest year ahead <span class="heart">♥</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="story">
+      <div class="section-inner">
+        <div class="kicker">funny how life works</div>
+        <h2>From chemistry classes<br>to <em style="color:var(--rose)">this.</em></h2>
+        <p>Somehow, after all that time, we ended up talking again. I still find that a little unexpected in the nicest way.</p>
+        <div class="story-list">
+          <div class="story-item">
+            <div class="story-dot">1</div>
+            <p><strong>Back then</strong><br>We knew each other from chemistry classes, when life was completely different.</p>
+          </div>
+          <div class="story-item">
+            <div class="story-dot">2</div>
+            <p><strong>Then, years passed</strong><br>We lost touch, went on with our own lives, and I honestly didn't know we'd talk again like this.</p>
+          </div>
+          <div class="story-item">
+            <div class="story-dot">3</div>
+            <p><strong>One reply later</strong><br>Aap replied to my convocation story, and somehow that one little reply turned into calls, texts and our random conversations.</p>
+          </div>
+          <div class="story-item">
+            <div class="story-dot">4</div>
+            <p><strong>Right now</strong><br>I'm still getting to know you again, but I like having you around. And yes, I really do like listening to your voice. There's just something about it.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="secret-note">
+      <div class="section-inner">
+        <div class="kicker">psst… one more thing</div>
+        <h2>A little note,<br>just for <em style="color:var(--rose)">you.</em></h2>
+        <div class="card">
+          <p>Okay, this part is a little more personal, so you have to press the button yourself.</p>
+          <div class="reveal-box">
+            <div style="font-size:28px; margin-bottom:15px; color:var(--rose)">✧</div>
+            <button id="secretBtn">read your little secret note</button>
+            <div class="secret" id="secretText">
+              Pata nahi aapko idea hai ya nahi, but I really look forward to talking to you. Sometimes even an ordinary day feels a little nicer after a call with you. I don't have everything figured out, and I don't think I need to right now. I'm just glad that somehow, after so long, we found our way back into each other's lives. ❤️
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-inner birthday-note">
+        <div class="divider">✦</div>
+        <h2>That's all for now.</h2>
+        <p>No big speech, no dramatic promises. Just a birthday wish from someone who's genuinely glad to know you again.</p>
+        <p>I hope today makes you feel special, because you deserve that.</p>
+        <div class="signature">happy birthday, Doctor Shaheb <span class="heart">♥</span></div>
+      </div>
+    </section>
+  </main>
+  <footer>made with a little thought, a little courage, and lots of warmth ♥</footer>
+</div>
+
+<script>
+  // Twinkling night sky — no external libraries needed.
+  const starCanvas = document.getElementById('stars');
+  const starCtx = starCanvas.getContext('2d');
+  let stars = [];
+  function resizeStars() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    starCanvas.width = innerWidth * dpr;
+    starCanvas.height = innerHeight * dpr;
+    starCanvas.style.width = innerWidth + 'px';
+    starCanvas.style.height = innerHeight + 'px';
+    starCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    stars = Array.from({length: Math.floor(innerWidth / 5)}, () => ({
+      x: Math.random() * innerWidth, y: Math.random() * innerHeight,
+      r: Math.random() * 1.3 + .2, a: Math.random() * .65 + .15,
+      speed: Math.random() * .012 + .003
+    }));
+  }
+  function drawStars() {
+    starCtx.clearRect(0, 0, innerWidth, innerHeight);
+    for (const s of stars) {
+      s.a += Math.sin(Date.now() * s.speed) * .001;
+      starCtx.beginPath(); starCtx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      starCtx.fillStyle = `rgba(255,224,234,${Math.max(.12, Math.min(.85, s.a))})`;
+      starCtx.fill();
+    }
+    requestAnimationFrame(drawStars);
+  }
+  resizeStars(); drawStars(); addEventListener('resize', resizeStars);
+
+  // Opening the birthday message also sends a soft confetti of tiny hearts.
+  document.getElementById('openBtn').addEventListener('click', () => {
+    const birthday = document.getElementById('birthday');
+    birthday.classList.add('show');
+    document.getElementById('openBtn').textContent = 'your surprise is open ♥';
+    document.getElementById('openBtn').disabled = true;
+    burstHearts();
+    setTimeout(() => birthday.scrollIntoView({behavior:'smooth', block:'start'}), 120);
+  });
+
+  document.getElementById('secretBtn').addEventListener('click', () => {
+    const note = document.getElementById('secretText');
+    note.classList.toggle('show');
+    document.getElementById('secretBtn').textContent = note.classList.contains('show')
+      ? 'hide the note ♥' : 'read your little secret note';
+  });
+
+  // Tiny heart confetti using canvas.
+  const confettiCanvas = document.getElementById('confetti');
+  const confettiCtx = confettiCanvas.getContext('2d');
+  let particles = [];
+  function resizeConfetti() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    confettiCanvas.width = innerWidth * dpr; confettiCanvas.height = innerHeight * dpr;
+    confettiCanvas.style.width = innerWidth + 'px'; confettiCanvas.style.height = innerHeight + 'px';
+    confettiCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  resizeConfetti(); addEventListener('resize', resizeConfetti);
+  function burstHearts() {
+    for (let i=0; i<44; i++) particles.push({
+      x: innerWidth * (.25 + Math.random()*.5), y: innerHeight*.48,
+      vx:(Math.random()-.5)*4, vy:-Math.random()*4-1,
+      life:70+Math.random()*35, size:8+Math.random()*10
+    });
+  }
+  function drawConfetti() {
+    confettiCtx.clearRect(0,0,innerWidth,innerHeight);
+    particles = particles.filter(p => p.life > 0);
+    for (const p of particles) {
+      p.x += p.vx; p.y += p.vy; p.vy += .035; p.life--;
+      confettiCtx.globalAlpha = Math.min(1, p.life/28);
+      confettiCtx.fillStyle = '#e9a6b5';
+      confettiCtx.font = `${p.size}px Georgia`;
+      confettiCtx.fillText('♥', p.x, p.y);
+    }
+    confettiCtx.globalAlpha = 1;
+    requestAnimationFrame(drawConfetti);
+  }
+  drawConfetti();
+
+  // Optional soft ambient tone generated locally; no audio file or external service.
+  let audioCtx = null, oscillator = null, gainNode = null, soundOn = false;
+  const soundButton = document.getElementById('musicToggle');
+  soundButton.addEventListener('click', async () => {
+    try {
+      if (!soundOn) {
+        audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+        await audioCtx.resume();
+        oscillator = audioCtx.createOscillator(); gainNode = audioCtx.createGain();
+        oscillator.type = 'sine'; oscillator.frequency.value = 174.61;
+        gainNode.gain.value = 0.012;
+        oscillator.connect(gainNode); gainNode.connect(audioCtx.destination); oscillator.start();
+        soundOn = true; soundButton.textContent = '♫ sound on';
+      } else {
+        if (oscillator) { oscillator.stop(); oscillator.disconnect(); oscillator = null; }
+        soundOn = false; soundButton.textContent = '♫ sound off';
+      }
+    } catch (e) {
+      soundButton.textContent = 'sound unavailable';
+    }
+  });
+</script>
+</body>
+</html>
